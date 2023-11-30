@@ -1,1 +1,1 @@
-web: gunicorn ecd:ecd
+web: gunicorn ecd:app
