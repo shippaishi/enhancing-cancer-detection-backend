@@ -80,9 +80,6 @@ class RoBERTaClass(torch.nn.Module):
         output = self.linear(output_2)
         return output
 
-model = RoBERTaClass()
-model.to(device)
-
 # load model and run inference
 model = RoBERTaClass().to(device)
 # model.load_state_dict(torch.load('enhance_cancer.pth'))
