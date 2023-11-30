@@ -1,15 +1,16 @@
 # make sure model 'enhance_cancer.pth' is stored in same directory
 
-from transformers import RobertaModel
-from transformers import AutoTokenizer
-from transformers import AutoModel
+from transformers import RobertaModel, AutoTokenizer
+from huggingface_hub import hf_hub_download
 import torch
 import pandas as pd
 from torch.utils import data
 from torch.utils.data import Dataset, DataLoader
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 device = ('cuda' if torch.cuda.is_available() else ('mps' if torch.backends.mps.is_available() else 'cpu')) #determines whether CUDA GPU or CPU is used
 MAX_LEN = 256 #max length for input data
@@ -85,7 +86,8 @@ model.to(device)
 # load model and run inference
 model = RoBERTaClass().to(device)
 # model.load_state_dict(torch.load('enhance_cancer.pth'))
-model = AutoModel.from_pretrained("your_username/my-awesome-model")
+model.load_state_dict(torch.load(hf_hub_download('isnortrice/enhancing-cancer-detection', 'enhance_cancer.pth')))
+
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 keys = {
