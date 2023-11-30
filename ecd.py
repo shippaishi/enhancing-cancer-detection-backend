@@ -133,7 +133,7 @@ def inference(symptom):
     print(hallmarksDesc) #debugging
     return hallmarksDesc
 
-@app.route('/predict', methods=['POST'])
+@app.route('/', methods=['POST'])
 def predict():
     data = request.get_json()
     input_data = data['symptom']
