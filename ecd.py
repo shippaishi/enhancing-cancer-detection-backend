@@ -2,6 +2,7 @@
 
 from transformers import RobertaModel
 from transformers import AutoTokenizer
+from transformers import AutoModel
 import torch
 import pandas as pd
 from torch.utils import data
@@ -83,7 +84,8 @@ model.to(device)
 
 # load model and run inference
 model = RoBERTaClass().to(device)
-model.load_state_dict(torch.load('enhance_cancer.pth'))
+# model.load_state_dict(torch.load('enhance_cancer.pth'))
+model = AutoModel.from_pretrained("your_username/my-awesome-model")
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 keys = {
