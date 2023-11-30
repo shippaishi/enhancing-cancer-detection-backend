@@ -120,20 +120,21 @@ def inference(symptom):
 
     # process output
     predictions = torch.sigmoid(output).detach().cpu().numpy()[0]
-    print(f'predictions: {predictions}') #debugging
+    # print(f'predictions: {predictions}') #debugging
     threshold = .5 #accept inputs over this value
     hallmarks = []
     for lID, prob in enumerate(predictions):
         if(prob > threshold):
             hallmarks.append(lID)
-    print(f'hallmarks: {hallmarks}') #debugging
+    # print(f'hallmarks: {hallmarks}') #debugging
 
-    hallmarksDesc = ""
+    hallmarksDesc = []
     for lID in hallmarks:
-        hallmarksDesc += keys[str(lID)]
+        hallmarksDesc.append(keys[str(lID)])
 
-    print(hallmarksDesc) #debugging
-    return hallmarksDesc
+    hout = ', '.join(hallmarksDesc)
+    # print(hout) #debugging
+    return hout
 
 @app.route('/', methods=['POST'])
 def predict():
